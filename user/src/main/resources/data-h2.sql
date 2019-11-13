@@ -1,0 +1,3 @@
+INSERT INTO t_user (id, user_name, user_pass, user_age) VALUES (1, 'zhangsan', '$2a$10$p45AR8RF7q.CWJzlMUcVA.KRCL21LGjqMlow9OFh4pRyiB5RO7JuO', 20);
+INSERT INTO t_user (id, user_name, user_pass, user_age) VALUES (2, 'list', '$2a$10$p45AR8RF7q.CWJzlMUcVA.KRCL21LGjqMlow9OFh4pRyiB5RO7JuO', 21);
+INSERT INTO t_user (id, user_name, user_pass, user_age) VALUES (3, 'wangwu', '$2a$10$p45AR8RF7q.CWJzlMUcVA.KRCL21LGjqMlow9OFh4pRyiB5RO7JuO', 23);

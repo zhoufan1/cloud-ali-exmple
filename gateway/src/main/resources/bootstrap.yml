@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        metadata:
+          preserved:
+            heart:
+              beat:
+                interval: 10000
+server:
+  port: 8161

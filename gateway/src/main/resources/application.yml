@@ -1,0 +1,26 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+          #用户中心
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+          #认证中心
+        - id: authority-service
+          uri: lb://authority-service
+          predicates:
+            - Path=/authority/**
+          filters:
+            #验证码
+            - CodeVerifyFilter
+            - StripPrefix=1
+
+logging:
+  level:
+    root: info
+    org:
+      spring: debug
