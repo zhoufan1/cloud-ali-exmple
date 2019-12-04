@@ -16,7 +16,7 @@ spring:
             - Path=/authority/**
           filters:
             #验证码
-            - CodeVerifyFilter
+            - CodeVerify=/authority/oauth/token,/oauth/token/v1
             - StripPrefix=1
 
 logging:

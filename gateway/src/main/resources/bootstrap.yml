@@ -4,11 +4,16 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848
+        server-addr: knife.cn:8848
         metadata:
           preserved:
             heart:
               beat:
                 interval: 10000
+      config:
+        server-addr: knife.cn:8848
+        group: ${spring.application.name}
+  profiles:
+    active: dev
 server:
   port: 8161

@@ -1,26 +1,23 @@
-package com.example.authority.config;
+package com.example.authority.provider.config;
 
-import com.example.authority.rpc.UserClient;
+import com.example.authority.dto.response.UserResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-/**
- * @author ZhouFan
- * @date 2019/10/25 16:33
- * @description
- */
+
 @Slf4j
 @Component
-public class UserServiceDetailImpl implements UserDetailsService {
+public class KnifeUserServiceDetailImpl implements UserDetailsService {
+    //    @Autowired
+//    private UserClient userClient;
     @Autowired
-    private UserClient userClient;
+    private PasswordEncoder passwordEncoder;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info("load username :{}",username);
+        log.info("load username :{}", username);
 //        Response<UserResponse> user = userClient.findUserByUserName(username);
      /*   UserResponse response = UserResponse.builder().id(1)
                 .userName("admin").userPass(new BCryptPasswordEncoder().encode("123456"))
@@ -31,6 +28,11 @@ public class UserServiceDetailImpl implements UserDetailsService {
         }
         log.info("response:{}", JSON.toJSONString(user));
         return new UserInfo(user.getData());*/
-        return null;
+        UserResponse response = new UserResponse();
+        response.setId(1);
+        response.setUserAge(20);
+        response.setUserName("admin");
+        response.setUserPass(passwordEncoder.encode("123456"));
+        return new UserInfo(response);
     }
 }

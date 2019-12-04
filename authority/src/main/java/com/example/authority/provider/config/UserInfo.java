@@ -1,17 +1,12 @@
-package com.example.authority.config;
+package com.example.authority.provider.config;
 
-import com.example.authority.dto.*;
-import com.google.common.collect.*;
-import org.springframework.security.core.*;
-import org.springframework.security.core.authority.*;
-import org.springframework.security.core.userdetails.*;
-import java.util.*;
+import com.example.authority.dto.response.UserResponse;
+import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Collection;
 
-/**
- * @author ZhouFan
- * @date 2019/10/10 18:01
- * @description
- */
+@Data
 public class UserInfo implements UserDetails {
     private Integer id;
 
@@ -25,11 +20,10 @@ public class UserInfo implements UserDetails {
 
 
     public UserInfo(UserResponse response) {
-        this.id =response.getId();
+        this.id = response.getId();
         this.userAge = response.getUserAge();
         this.userName = response.getUserName();
         this.userPass = response.getUserPass();
-        this.authorities = Lists.newArrayList(new SimpleGrantedAuthority("USER"));
     }
 
     @Override
@@ -67,19 +61,4 @@ public class UserInfo implements UserDetails {
         return true;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public Integer getUserAge() {
-        return userAge;
-    }
-
-    public String getUserPass() {
-        return userPass;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
 }

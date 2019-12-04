@@ -15,10 +15,10 @@
     <properties>
         <java.version>1.8</java.version>
         <!-- spring -->
-        <spring.version>5.1.5.RELEASE</spring.version>
+        <spring.version>5.1.10.RELEASE</spring.version>
         <!-- 工具 -->
-        <fastjson.vesrsion>1.2.34</fastjson.vesrsion>
-        <guava.version>21.0</guava.version>
+        <fastjson.vesrsion>1.2.62</fastjson.vesrsion>
+        <guava.version>28.1-jre</guava.version>
         <commons-lang3.version>3.5</commons-lang3.version>
     </properties>
 
@@ -28,11 +28,6 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-<!--        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>-->
         <!-- 阿里巴巴提供json工具 -->
         <dependency>
             <groupId>com.alibaba</groupId>

@@ -1,0 +1,13 @@
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
+
+
+authorization:
+  ignore:
+    urls:
+      - /oauth
+

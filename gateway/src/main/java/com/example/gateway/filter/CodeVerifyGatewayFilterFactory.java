@@ -1,6 +1,7 @@
 package com.example.gateway.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.example.foundation.dto.BaseCode;
 import com.example.foundation.dto.Response;
 import com.example.foundation.exception.BusinessException;
 import com.example.foundation.provider.within.DesAlgorithm;
@@ -8,6 +9,7 @@ import com.example.foundation.utils.CollectionUtils;
 import com.example.gateway.common.GateWayCode;
 import com.example.gateway.common.SecurityConstants;
 import com.google.common.base.Splitter;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -18,6 +20,7 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import reactor.core.publisher.Mono;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -27,35 +30,70 @@ import java.util.List;
  */
 @Component
 @Slf4j
-public class CodeVerifyFilter extends AbstractGatewayFilterFactory {
+public class CodeVerifyGatewayFilterFactory extends AbstractGatewayFilterFactory<CodeVerifyGatewayFilterFactory.CodeConfig> {
+
+    private static final String KEY = "paths";
+    public CodeVerifyGatewayFilterFactory() {
+        super(CodeConfig.class);
+    }
 
     @Override
-    public GatewayFilter apply(Object config) {
+    public ShortcutType shortcutType() {
+        return ShortcutType.GATHER_LIST;
+    }
+
+    @Override
+    public List<String> shortcutFieldOrder() {
+        return Collections.singletonList(KEY);
+    }
+
+    @Override
+    public GatewayFilter apply(CodeConfig config) {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
             String path = request.getURI().getPath();
-            if (StringUtils.contains(path, SecurityConstants.OAUTH_TOKEN_URL)) {
-                try {
-                    checkCode(request);
-                } catch (Exception e) {
-                    log.error("verify fail , ", e);
-                    ServerHttpResponse response = exchange.getResponse();
-                    response.setStatusCode(HttpStatus.PRECONDITION_REQUIRED);
-                    return response.writeWith(Mono.just(response.bufferFactory().wrap(JSON.toJSONBytes(Response.systemError(e.getMessage())))));
+            if (CollectionUtils.isNullOrEmpty(config.getPaths())) {
+                chain.filter(exchange);
+            }
 
+            try {
+                if (config.getPaths().contains(path)) {
+                    checkCode(request);
                 }
+            } catch (BusinessException e) {
+                log.error("veify code fail ", e);
+                BaseCode code = e.getCode();
+                ServerHttpResponse response = exchange.getResponse();
+                response.setStatusCode(HttpStatus.PRECONDITION_REQUIRED);
+                return response.writeWith(Mono.just(response.bufferFactory()
+                        .wrap(JSON.toJSONBytes(code))));
+            } catch (Exception e) {
+                log.error("system  fail , ", e);
+                ServerHttpResponse response = exchange.getResponse();
+                response.setStatusCode(HttpStatus.PRECONDITION_REQUIRED);
+                return response.writeWith(Mono.just(response.bufferFactory()
+                        .wrap(JSON.toJSONBytes(Response.systemError(e.getMessage())))));
             }
             return chain.filter(exchange);
         };
     }
 
+    @Data
+    public static class CodeConfig {
+        private List<String> paths;
+    }
+
     private void checkCode(ServerHttpRequest request) {
         MultiValueMap<String, String> queryParams = request.getQueryParams();
         String verifyCode = queryParams.getFirst("verifyCode");
+        String encrypt = queryParams.getFirst(SecurityConstants.VERIFY_CODE_ENCRYPT);
+        checkVerifyEncrypt(verifyCode, encrypt);
+    }
+
+    private void checkVerifyEncrypt(String verifyCode, String encrypt) {
         if (StringUtils.isBlank(verifyCode)) {
             throw new BusinessException(GateWayCode.CaptchaError);
         }
-        String encrypt = queryParams.getFirst(SecurityConstants.VERIFY_CODE_ENCRYPT);
         if (StringUtils.isBlank(encrypt)) {
             throw new BusinessException(GateWayCode.CaptchaEncryptNull);
         }
