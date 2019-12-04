@@ -30,17 +30,17 @@ public abstract class DynamicRoutingConfig implements ApplicationEventPublisherA
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
-    public void save(RouteDefinition route) {
+    protected void save(RouteDefinition route) {
         routeDefinitionWriter.save(Mono.just(route));
         applicationEventPublisher.publishEvent(new RefreshRoutesEvent(this));
     }
 
-    public void  delete(String id){
+    protected void  delete(String id){
         routeDefinitionWriter.delete(Mono.just(id));
         applicationEventPublisher.publishEvent(new RefreshRoutesEvent(this));
     }
 
-    public void update(RouteDefinition route) {
+    protected void update(RouteDefinition route) {
         routeDefinitionWriter.delete(Mono.just(route.getId())).then(
                 routeDefinitionWriter.save(Mono.just(route))
         );
