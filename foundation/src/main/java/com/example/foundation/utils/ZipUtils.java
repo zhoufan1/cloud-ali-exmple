@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import java.util.zip.ZipEntry;
@@ -127,14 +128,14 @@ public class ZipUtils {
 		String compressedStr = null;
 		try {
 			out = new ByteArrayOutputStream();
-			zout = new ZipOutputStream(out);
+			zout = new ZipOutputStream(out, Charset.defaultCharset());
 			zout.putNextEntry(new ZipEntry("0"));
-			zout.write(value.getBytes());
+			byte[] bytes = value.getBytes(IOUtils.UTF8.name());
+			zout.write(bytes);
 			zout.closeEntry();
 			compressed = out.toByteArray();
 			compressedStr = new sun.misc.BASE64Encoder().encodeBuffer(compressed);
 		} catch (IOException e) {
-			compressed = null;
 			log.error(e.getMessage(), e);
 		} finally {
 			if (zout != null) {

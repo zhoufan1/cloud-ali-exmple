@@ -5,13 +5,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.client.config.listener.impl.PropertiesListener;
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionWriter;
 import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -34,10 +31,10 @@ public class DynamincRoutingNacosConfig extends DynamicRoutingConfig {
     @PostConstruct
     public void onMessage() throws Exception {
         ConfigService configService = nacosConfigProperties.configServiceInstance();
-        configService.addListener("gateway", "gateway", Listener());
+        configService.addListener("gateway", "gateway", listener());
     }
 
-    public Listener Listener() {
+    public Listener listener() {
         return new PropertiesListener() {
             @Override
             public void innerReceive(Properties properties) {

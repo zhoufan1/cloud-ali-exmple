@@ -52,7 +52,8 @@ public final class DesAlgorithm {
      */
     public String decrypt(String strIn) {
         try {
-            return new String(decrypt(EncryptUtils.hex2Bytes(strIn)));
+            byte[] decrypt = decrypt(EncryptUtils.hex2Bytes(strIn));
+            return new String(decrypt,IOUtils.UTF8.name());
         } catch (Exception e){
             throw new RuntimeException("DES algorithm decrypt error.....", e);
         }

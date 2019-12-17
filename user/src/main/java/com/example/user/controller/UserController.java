@@ -10,20 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/userInfo")
 public class UserController {
 
-    /*   @Autowired
-       private UserService userService;
-
-       @RequestMapping("/findAll")
-       public List<User> findAll() {
-           List<User> all = userService.findAll();
-           return all;
-       }
-
-       @RequestMapping("/findUserByUserName")
-       public User findUserByUserName(@RequestParam("userName") String userName){
-           return userService.findUserByUserName(userName);
-       }
-   */
     @PostMapping("/sayHello")
     public Response<String> sayHello(@RequestParam("name") String name) {
         return Response.success("hello:" + name);
