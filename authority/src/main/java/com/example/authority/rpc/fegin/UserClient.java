@@ -1,4 +1,4 @@
-package com.example.authority.rpc;
+package com.example.authority.rpc.fegin;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
