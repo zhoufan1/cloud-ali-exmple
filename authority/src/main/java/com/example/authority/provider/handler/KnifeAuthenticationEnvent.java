@@ -24,7 +24,7 @@ public class KnifeAuthenticationEnvent implements ApplicationListener<AbstractAu
 
         if (event instanceof AbstractAuthenticationFailureEvent) {
             AuthenticationException exception = ((AbstractAuthenticationFailureEvent) event).getException();
-            log.error("{} authentication failure , 异常：{}", authentication.getPrincipal(), exception);
+            log.error("authentication failure , 异常：{}", exception);
         }
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserDubboServcie {
-    @Reference
+    @Reference(check = false)
     private UserDubboClient userDubboClient;
 
     public UserResponse sayHello(String name) {

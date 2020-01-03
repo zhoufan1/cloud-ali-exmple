@@ -15,8 +15,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import java.util.ArrayList;
 
 @Configuration
@@ -26,7 +26,7 @@ public class KnifeAuthorizationServerConfiguration extends AuthorizationServerCo
 
     private final AuthenticationManager authenticationManagerBean;
     private final TokenEnhancer tokenEnhancer;
-    private final JwtTokenStore jwtTokenStore;
+    private final TokenStore tokenStore;
     private final JwtAccessTokenConverter jwtAccessTokenConverter;
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService knifeUserServiceDetailImpl;
@@ -75,10 +75,11 @@ public class KnifeAuthorizationServerConfiguration extends AuthorizationServerCo
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         //允许表单认证
-        endpoints.allowedTokenEndpointRequestMethods(HttpMethod.GET,HttpMethod.POST)
-                .tokenStore(jwtTokenStore)
+        endpoints.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
+                .tokenStore(tokenStore)
                 .authenticationManager(authenticationManagerBean)
                 .userDetailsService(knifeUserServiceDetailImpl);
+//                .tokenEnhancer(tokenEnhancer);
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         ArrayList<TokenEnhancer> tokenEnhancers = Lists.newArrayList(tokenEnhancer, jwtAccessTokenConverter);
         tokenEnhancerChain.setTokenEnhancers(tokenEnhancers);

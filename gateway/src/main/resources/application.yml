@@ -22,5 +22,9 @@ spring:
 logging:
   level:
     root: info
-    org:
-      spring: debug
+com:
+  alibaba:
+    nacos:
+      naming:
+        log:
+          level: warn

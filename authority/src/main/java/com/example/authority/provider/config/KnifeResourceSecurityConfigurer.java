@@ -1,11 +1,13 @@
 package com.example.authority.provider.config;
 
+import com.example.authority.provider.handler.KnifeAccessDeniedHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import java.util.List;
 
 /**
@@ -16,13 +18,12 @@ import java.util.List;
 @AllArgsConstructor
 public class KnifeResourceSecurityConfigurer extends ResourceServerConfigurerAdapter {
 
-//    private final AccessDeniedHandler exampleAccessDeniedHandler;
     private final KnifeFilterIgnoreConfig knifeFilterIgnoreConfig;
-
-  /*  @Override
+    private final KnifeAccessDeniedHandler knifeAccessDeniedHandler;
+    @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
-        resources.accessDeniedHandler(exampleAccessDeniedHandler);
-    }*/
+        resources.accessDeniedHandler(knifeAccessDeniedHandler);
+    }
 
 
     @Override

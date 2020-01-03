@@ -6,6 +6,7 @@ import com.example.authority.dto.BusinessCode;
 import com.example.foundation.dto.Response;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
@@ -30,6 +31,7 @@ public class KnifeAccessDeniedHandler extends OAuth2AccessDeniedHandler {
         response.setCharacterEncoding(IOUtils.UTF8.name());
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         PrintWriter writer = response.getWriter();
-        writer.println(JSON.toJSONString(Response.failed(BusinessCode.UnAuthorization)));
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        writer.append(JSON.toJSONString(Response.failed(BusinessCode.UnAuthorization)));
     }
 }

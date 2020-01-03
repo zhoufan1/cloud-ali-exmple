@@ -2,9 +2,10 @@ package com.example.foundation.dto;
 
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
+import java.io.Serializable;
 
 @Data
-public class Response<T> {
+public class Response<T> implements Serializable {
     private String code;
     private String message;
     private T data;
@@ -40,7 +41,7 @@ public class Response<T> {
         return new Response<>(SystemCode.ERROR.getCode(), message);
     }
 
-    public static <T> Response<T> create(BaseCode baseCode, T data) {
+    public static <T> Response<T> failed(BaseCode baseCode, T data) {
         return new Response<>(baseCode.getCode(), baseCode.getMessage(), data);
     }
 
