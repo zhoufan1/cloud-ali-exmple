@@ -79,12 +79,11 @@ public class KnifeAuthorizationServerConfiguration extends AuthorizationServerCo
                 .tokenStore(tokenStore)
                 .authenticationManager(authenticationManagerBean)
                 .userDetailsService(knifeUserServiceDetailImpl);
-//                .tokenEnhancer(tokenEnhancer);
+        // 增強支持jwt参数
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         ArrayList<TokenEnhancer> tokenEnhancers = Lists.newArrayList(tokenEnhancer, jwtAccessTokenConverter);
         tokenEnhancerChain.setTokenEnhancers(tokenEnhancers);
         endpoints.tokenEnhancer(tokenEnhancerChain).accessTokenConverter(jwtAccessTokenConverter);
     }
-
 
 }

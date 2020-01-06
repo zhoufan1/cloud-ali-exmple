@@ -1,10 +1,11 @@
 package com.example.gateway;
 
+import com.example.foundation.web.config.WebConfigurationSupport;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = WebConfigurationSupport.class)
 @EnableDiscoveryClient
 public class GatewayApplication {
 

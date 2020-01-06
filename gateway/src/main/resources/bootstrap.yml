@@ -15,5 +15,7 @@ spring:
         group: ${spring.application.name}
   profiles:
     active: dev
+  main:
+    allow-bean-definition-overriding: true
 server:
   port: 8161

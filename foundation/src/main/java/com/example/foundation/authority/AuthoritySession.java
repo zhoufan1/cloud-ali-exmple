@@ -8,10 +8,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthoritySession {
-    public static final String X_AUTHORITY_HEADER = "X-Authority";
+    public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String AUTHORIZATION_TYPE = "bearer ";
+
+
     private Integer Id;
     private String version;
-    private String clientIp;
     private Long clientTime;
+    private String userName;
 
 }

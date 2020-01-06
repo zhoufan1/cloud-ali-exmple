@@ -20,6 +20,7 @@
         <fastjson.vesrsion>1.2.62</fastjson.vesrsion>
         <guava.version>28.1-jre</guava.version>
         <commons-lang3.version>3.5</commons-lang3.version>
+        <jwt.version>0.9.1</jwt.version>
     </properties>
 
     <dependencies>
@@ -62,6 +63,12 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+
 
     </dependencies>
 
