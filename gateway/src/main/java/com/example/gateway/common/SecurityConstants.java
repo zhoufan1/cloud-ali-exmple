@@ -1,7 +1,7 @@
 package com.example.gateway.common;
 
 /**
- * @author ZhouFan
+ * @author knife
  * @date 2019/11/7 10:07
  * @description
  */

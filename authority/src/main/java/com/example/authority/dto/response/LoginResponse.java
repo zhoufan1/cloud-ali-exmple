@@ -3,7 +3,7 @@ package com.example.authority.dto.response;
 import lombok.*;
 
 /**
- * @author zhoufan
+ * @author knife
  * @date 2019/6/13 09:59
  * @description
  */

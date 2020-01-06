@@ -4,7 +4,7 @@ import com.example.foundation.dto.BaseCode;
 import lombok.AllArgsConstructor;
 
 /**
- * @author ZhouFan
+ * @author knife
  * @date 2019/11/7 10:14
  * @description
  */

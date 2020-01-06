@@ -14,7 +14,7 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 /**
  *
  *
- * @author ZhouFan
+ * @author knife
  * @date 2019/10/14 17:42
  * @description 设置断路器与验证的路由信息
  */

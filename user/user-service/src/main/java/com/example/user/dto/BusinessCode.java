@@ -3,7 +3,7 @@ package com.example.user.dto;
 import com.example.foundation.dto.BaseCode;
 
 /**
- * @author zhoufan
+ * @author knife
  * @date 2019/6/13 10:15
  * @description
  */

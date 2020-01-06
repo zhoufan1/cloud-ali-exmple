@@ -22,7 +22,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * @author ZhouFan
+ * @author knife
  * @date 2019/11/6 14:28
  * @description
  */
