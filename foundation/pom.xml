@@ -15,7 +15,7 @@
     <properties>
         <java.version>1.8</java.version>
         <!-- spring -->
-        <spring.version>5.1.10.RELEASE</spring.version>
+        <spring.version>5.2.0.RELEASE</spring.version>
         <!-- 工具 -->
         <fastjson.vesrsion>1.2.62</fastjson.vesrsion>
         <guava.version>28.1-jre</guava.version>
