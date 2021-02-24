@@ -1,9 +1,12 @@
+server:
+  port: 8161
 spring:
   application:
-    name: gateway
+    name: @artifactId@
   cloud:
     nacos:
       discovery:
+        group: ${spring.profiles.active}
         server-addr: knife.cn:8848
         metadata:
           preserved:
@@ -11,11 +14,15 @@ spring:
               beat:
                 interval: 10000
       config:
-        server-addr: knife.cn:8848
-        group: ${spring.application.name}
+        group: ${spring.profiles.active}
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        shared-configs:
+          - data-id: application.${spring.cloud.nacos.config.file-extension}
+            group: ${spring.profiles.active}
+            refresh: true
   profiles:
     active: dev
   main:
     allow-bean-definition-overriding: true
-server:
-  port: 8161
+

@@ -10,4 +10,5 @@ authorization:
   ignore:
     urls:
       - /oauth
+      - /actuator/health
 
