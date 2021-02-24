@@ -20,6 +20,7 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import reactor.core.publisher.Mono;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -33,6 +34,7 @@ import java.util.List;
 public class CodeVerifyGatewayFilterFactory extends AbstractGatewayFilterFactory<CodeVerifyGatewayFilterFactory.CodeConfig> {
 
     private static final String KEY = "paths";
+
     public CodeVerifyGatewayFilterFactory() {
         super(CodeConfig.class);
     }
@@ -61,7 +63,7 @@ public class CodeVerifyGatewayFilterFactory extends AbstractGatewayFilterFactory
                     checkCode(request);
                 }
             } catch (BusinessException e) {
-                log.error("veify code fail ", e);
+                log.error("check code fail ", e);
                 BaseCode code = e.getCode();
                 ServerHttpResponse response = exchange.getResponse();
                 response.setStatusCode(HttpStatus.PRECONDITION_REQUIRED);

@@ -11,7 +11,7 @@
 
     <parent>
         <groupId>com.example</groupId>
-        <artifactId>ali-example</artifactId>
+        <artifactId>cloud-ali-example</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
