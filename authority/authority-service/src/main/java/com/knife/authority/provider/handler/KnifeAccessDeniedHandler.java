@@ -29,7 +29,7 @@ public class KnifeAccessDeniedHandler extends OAuth2AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException authException) {
         log.warn("授权失败，禁止访问 {} , exception:{}", request.getRequestURI(), authException);
         response.setCharacterEncoding(IOUtils.UTF8.name());
-        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         PrintWriter writer = response.getWriter();
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         writer.append(JSON.toJSONString(Response.failed(BusinessCode.UnAuthorization)));

@@ -1,8 +1,10 @@
 package com.knife.authority.provider.config;
 
+import com.google.common.collect.Lists;
 import com.knife.user.dto.response.UserResponse;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -25,6 +27,7 @@ public class UserInfo implements UserDetails {
         this.userAge = response.getUserAge();
         this.userName = response.getUserName();
         this.userPass = response.getPassword();
+        this.authorities = Lists.newArrayList(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 
     @Override

@@ -22,7 +22,7 @@ public class KnifeUserServiceDetailImpl implements UserDetailsService {
         response.setId(1);
         response.setUserAge(20);
         response.setUserName("knife");
-        response.setPassword(passwordEncoder.encode("123456"));
+        response.setPassword("{bcrypt}$2a$10$4xuS09PXFZC0SHpWWsiZpO2obydzi6wWwdIPfIxc1gwIwst7iq17C");
         return new UserInfo(response);
     }
 }

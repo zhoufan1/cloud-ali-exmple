@@ -1,5 +1,5 @@
 server:
-  port: 8161
+  port: 10011
 spring:
   cloud:
     nacos:
@@ -24,4 +24,4 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: gateway
+    name: authority-service

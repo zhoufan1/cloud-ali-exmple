@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -27,8 +26,7 @@ public class KnifeAuthorizationServerConfiguration extends AuthorizationServerCo
     private final AuthenticationManager authenticationManagerBean;
     private final TokenEnhancer tokenEnhancer;
     private final TokenStore tokenStore;
-//    private final JwtAccessTokenConverter jwtAccessTokenConverter;
-    private final PasswordEncoder passwordEncoder;
+    //    private final JwtAccessTokenConverter jwtAccessTokenConverter;
     private final UserDetailsService knifeUserServiceDetailImpl;
 
     /**
@@ -40,12 +38,9 @@ public class KnifeAuthorizationServerConfiguration extends AuthorizationServerCo
     @SneakyThrows
     public void configure(AuthorizationServerSecurityConfigurer security) {
         security
-                //url:/oauth/token_key,exposes public key for token verification if using JWT tokens
                 .tokenKeyAccess("permitAll()")
-                //url:/oauth/check_token allow check token
                 .checkTokenAccess("isAuthenticated()")
-                .allowFormAuthenticationForClients()
-                .passwordEncoder(passwordEncoder);
+                .allowFormAuthenticationForClients();
     }
 
     /**
@@ -59,10 +54,18 @@ public class KnifeAuthorizationServerConfiguration extends AuthorizationServerCo
         //配置两个客户端,一个用于password认证一个用于client认证
         clients.inMemory()
                 .withClient("knife-app")
-                .authorizedGrantTypes("refresh_token", "password", "client_credentials")
-                .scopes("all")
-                .secret(passwordEncoder.encode("123456"));
-
+                .authorizedGrantTypes("refresh_token", "client_credentials")
+                .scopes("app")
+                .secret("{bcrypt}$2a$10$4xuS09PXFZC0SHpWWsiZpO2obydzi6wWwdIPfIxc1gwIwst7iq17C")
+                .accessTokenValiditySeconds(60 * 60 * 5)
+                .refreshTokenValiditySeconds(60 * 60 * 6)
+                .and()
+                .withClient("knife-web")
+                .authorizedGrantTypes("refresh_token", "password")
+                .scopes("web")
+                .secret("{bcrypt}$2a$10$4xuS09PXFZC0SHpWWsiZpO2obydzi6wWwdIPfIxc1gwIwst7iq17C")
+                .accessTokenValiditySeconds(60 * 60 * 3)
+                .refreshTokenValiditySeconds(60 * 60 * 5);
     }
 
     /**
@@ -73,7 +76,7 @@ public class KnifeAuthorizationServerConfiguration extends AuthorizationServerCo
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         //允许表单认证
-        endpoints.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
+        endpoints.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS)
                 .tokenStore(tokenStore)
                 .authenticationManager(authenticationManagerBean)
                 .userDetailsService(knifeUserServiceDetailImpl);

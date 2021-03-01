@@ -1,4 +1,4 @@
-package com.knife.authority;
+package com.knife;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

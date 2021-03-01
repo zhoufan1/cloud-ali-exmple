@@ -2,7 +2,7 @@ spring:
   cloud:
     gateway:
       routes:
-          #用户中心
+        #用户中心
         - id: user-service
           uri: lb://user-service
           predicates:
@@ -16,15 +16,14 @@ spring:
             - Path=/authority/**
           filters:
             #验证码
-            - CodeVerify=/authority/oauth/token,/oauth/token/v1
+            - CodeVerify=/authority/oauth/token/v2,/oauth/token/v1
             - StripPrefix=1
-
 logging:
   level:
     root: info
-com:
-  alibaba:
-    nacos:
-      naming:
-        log:
-          level: warn
+    com:
+      alibaba:
+        nacos:
+          naming:
+            log:
+              level: warn

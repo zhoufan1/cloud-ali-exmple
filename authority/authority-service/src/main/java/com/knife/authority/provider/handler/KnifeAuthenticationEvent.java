@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class KnifeAuthenticationEnvent implements ApplicationListener<AbstractAuthenticationEvent> {
+public class KnifeAuthenticationEvent implements ApplicationListener<AbstractAuthenticationEvent> {
     @Override
     public void onApplicationEvent(AbstractAuthenticationEvent event) {
         log.info("onApplicationEvent  start ...");
@@ -24,7 +24,7 @@ public class KnifeAuthenticationEnvent implements ApplicationListener<AbstractAu
 
         if (event instanceof AbstractAuthenticationFailureEvent) {
             AuthenticationException exception = ((AbstractAuthenticationFailureEvent) event).getException();
-            log.error("authentication failure , 异常：{}", exception);
+            log.error("authentication failure , 异常： ", exception);
         }
     }
 }

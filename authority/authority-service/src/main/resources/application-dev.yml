@@ -1,0 +1,22 @@
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
+
+
+authorization:
+  ignore:
+    urls:
+      - /oauth/**
+      - /actuator/health
+
+dubbo:
+  cloud:
+    subscribed-services: user-service
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: spring-cloud://localhost
+    check: false

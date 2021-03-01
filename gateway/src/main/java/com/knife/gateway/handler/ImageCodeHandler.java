@@ -1,10 +1,10 @@
 package com.knife.gateway.handler;
 
+import com.google.code.kaptcha.Producer;
+import com.google.common.base.Joiner;
 import com.knife.foundation.provider.within.DesAlgorithm;
 import com.knife.foundation.utils.DateUtils;
 import com.knife.gateway.common.SecurityConstants;
-import com.google.code.kaptcha.Producer;
-import com.google.common.base.Joiner;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
@@ -17,6 +17,7 @@ import org.springframework.web.reactive.function.server.HandlerFunction;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -49,6 +50,6 @@ public class ImageCodeHandler implements HandlerFunction<ServerResponse> {
         return ServerResponse.status(HttpStatus.OK)
                 .contentType(MediaType.IMAGE_JPEG)
                 .header(SecurityConstants.VERIFY_CODE_ENCRYPT, verifyCodeEncrypt)
-                .body(BodyInserters.fromValue(new ByteArrayResource(os.toByteArray())));
+                .body(BodyInserters.fromResource(new ByteArrayResource(os.toByteArray())));
     }
 }
