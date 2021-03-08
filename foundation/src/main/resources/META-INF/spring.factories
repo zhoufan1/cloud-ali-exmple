@@ -1,1 +1,3 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.knife.foundation.web.config.WebConfigurationSupport,com.knife.foundation.web.interceptor.AuthorityFeginRequestInterceptor
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.knife.foundation.web.config.WebConfigurationSupport,\
+  com.knife.foundation.web.interceptor.AuthorityRequestInterceptor

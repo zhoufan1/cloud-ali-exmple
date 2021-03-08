@@ -15,6 +15,7 @@
    <modules>
        <module>authority-api</module>
        <module>authority-service</module>
+       <module>authority-security</module>
    </modules>
 
 </project>

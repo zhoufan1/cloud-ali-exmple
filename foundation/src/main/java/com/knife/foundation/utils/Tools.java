@@ -4,6 +4,7 @@
 package com.knife.foundation.utils;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -69,7 +70,7 @@ public class Tools {
 
 	public static final int DECIMAL_MULTIPLES = 10;
 
-	public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
+	public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
 	public static final String SUPPRESS_WARININGS_UNCHECKED = "unchecked";
 

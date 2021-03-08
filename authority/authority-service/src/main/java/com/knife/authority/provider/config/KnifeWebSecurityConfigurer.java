@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity()
 @AllArgsConstructor
 @Slf4j
 public class KnifeWebSecurityConfigurer extends WebSecurityConfigurerAdapter {

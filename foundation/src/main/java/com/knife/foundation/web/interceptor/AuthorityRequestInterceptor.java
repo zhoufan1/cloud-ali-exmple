@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * @description
  */
 @Slf4j
-public class AuthorityFeginRequestInterceptor implements RequestInterceptor {
+public class AuthorityRequestInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate template) {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();

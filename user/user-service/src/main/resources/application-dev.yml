@@ -6,3 +6,17 @@ dubbo:
     address: spring-cloud://localhost
   scan:
     base-packages: com.example.user.rpc.dubbo
+security:
+  oauth2:
+    client:
+      client_id: knife-app
+      client_secret: knife-app
+    resource:
+      token-info-uri: http://authority-service/oauth/check_token
+
+oauth:
+  client:
+    security:
+      ignore:
+        urls:
+          - /swagger/*

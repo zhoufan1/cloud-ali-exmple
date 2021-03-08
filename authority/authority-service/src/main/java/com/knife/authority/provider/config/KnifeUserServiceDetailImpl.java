@@ -22,7 +22,8 @@ public class KnifeUserServiceDetailImpl implements UserDetailsService {
         response.setId(1);
         response.setUserAge(20);
         response.setUserName("knife");
-        response.setPassword("{bcrypt}$2a$10$4xuS09PXFZC0SHpWWsiZpO2obydzi6wWwdIPfIxc1gwIwst7iq17C");
+        response.setMobile("13020188016");
+        response.setPassword("{bcrypt}$2a$10$0ttMfB7qAt.2UFySb2OYZu0Rl8JnuLxWNy.PB5OuKKkehphNLAEbK");
         return new UserInfo(response);
     }
 }

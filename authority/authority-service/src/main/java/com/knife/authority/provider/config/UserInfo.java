@@ -19,6 +19,8 @@ public class UserInfo implements UserDetails {
 
     private String userPass;
 
+    private String userMob;
+
     private Collection<? extends GrantedAuthority> authorities;
 
 
@@ -27,6 +29,7 @@ public class UserInfo implements UserDetails {
         this.userAge = response.getUserAge();
         this.userName = response.getUserName();
         this.userPass = response.getPassword();
+        this.userMob = response.getMobile();
         this.authorities = Lists.newArrayList(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 

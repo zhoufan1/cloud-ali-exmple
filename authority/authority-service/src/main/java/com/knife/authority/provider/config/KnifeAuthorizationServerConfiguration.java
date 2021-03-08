@@ -1,6 +1,7 @@
 package com.knife.authority.provider.config;
 
 import com.google.common.collect.Lists;
+import com.knife.authority.security.constants.SecurityConstants;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import java.util.ArrayList;
 
@@ -26,7 +28,7 @@ public class KnifeAuthorizationServerConfiguration extends AuthorizationServerCo
     private final AuthenticationManager authenticationManagerBean;
     private final TokenEnhancer tokenEnhancer;
     private final TokenStore tokenStore;
-    //    private final JwtAccessTokenConverter jwtAccessTokenConverter;
+    private final JwtAccessTokenConverter jwtAccessTokenConverter;
     private final UserDetailsService knifeUserServiceDetailImpl;
 
     /**
@@ -53,19 +55,26 @@ public class KnifeAuthorizationServerConfiguration extends AuthorizationServerCo
     public void configure(ClientDetailsServiceConfigurer clients) {
         //配置两个客户端,一个用于password认证一个用于client认证
         clients.inMemory()
+                .withClient("knife-other")
+                .authorizedGrantTypes(SecurityConstants.REFRESH_TOKEN, SecurityConstants.CLIENT_CREDENTIALS)
+                .scopes("other")
+                .secret("{noop}knife-other")
+                .accessTokenValiditySeconds(SecurityConstants.ACCESS_TOKEN_VALIDITY_SECONDS)
+                .refreshTokenValiditySeconds(SecurityConstants.REFRESH_TOKEN_VALIDITY_SECONDS)
+                .and()
                 .withClient("knife-app")
-                .authorizedGrantTypes("refresh_token", "client_credentials")
+                .authorizedGrantTypes(SecurityConstants.REFRESH_TOKEN, SecurityConstants.PASSWORD)
                 .scopes("app")
-                .secret("{bcrypt}$2a$10$4xuS09PXFZC0SHpWWsiZpO2obydzi6wWwdIPfIxc1gwIwst7iq17C")
-                .accessTokenValiditySeconds(60 * 60 * 5)
-                .refreshTokenValiditySeconds(60 * 60 * 6)
+                .secret("{noop}knife-app")
+                .accessTokenValiditySeconds(SecurityConstants.ACCESS_TOKEN_VALIDITY_SECONDS)
+                .refreshTokenValiditySeconds(SecurityConstants.REFRESH_TOKEN_VALIDITY_SECONDS)
                 .and()
                 .withClient("knife-web")
-                .authorizedGrantTypes("refresh_token", "password")
+                .authorizedGrantTypes(SecurityConstants.REFRESH_TOKEN, SecurityConstants.PASSWORD)
                 .scopes("web")
-                .secret("{bcrypt}$2a$10$4xuS09PXFZC0SHpWWsiZpO2obydzi6wWwdIPfIxc1gwIwst7iq17C")
-                .accessTokenValiditySeconds(60 * 60 * 3)
-                .refreshTokenValiditySeconds(60 * 60 * 5);
+                .secret("{noop}knife-web")
+                .accessTokenValiditySeconds(SecurityConstants.ACCESS_TOKEN_VALIDITY_SECONDS)
+                .refreshTokenValiditySeconds(SecurityConstants.REFRESH_TOKEN_VALIDITY_SECONDS);
     }
 
     /**
@@ -84,7 +93,7 @@ public class KnifeAuthorizationServerConfiguration extends AuthorizationServerCo
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         ArrayList<TokenEnhancer> tokenEnhancers = Lists.newArrayList(tokenEnhancer);
         tokenEnhancerChain.setTokenEnhancers(tokenEnhancers);
-//        endpoints.tokenEnhancer(tokenEnhancerChain).accessTokenConverter(jwtAccessTokenConverter);
+        endpoints.tokenEnhancer(tokenEnhancerChain).accessTokenConverter(jwtAccessTokenConverter);
     }
 
 }

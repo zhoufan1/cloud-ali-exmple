@@ -2,7 +2,7 @@ package com.knife.foundation.authority;
 
 public final class AuthorityContent {
     private AuthoritySession authoritySession;
-    private static ThreadLocal<AuthorityContent> holder = ThreadLocal.withInitial(AuthorityContent::new);
+    private static final ThreadLocal<AuthorityContent> holder = ThreadLocal.withInitial(AuthorityContent::new);
 
     public static AuthorityContent get() {
         return holder.get();
