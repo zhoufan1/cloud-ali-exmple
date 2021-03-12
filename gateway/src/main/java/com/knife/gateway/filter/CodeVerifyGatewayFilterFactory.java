@@ -1,11 +1,11 @@
 package com.knife.gateway.filter;
 
 import com.google.common.base.Splitter;
-import com.knife.foundation.exception.BusinessException;
-import com.knife.foundation.provider.within.DesAlgorithm;
-import com.knife.foundation.utils.CollectionUtils;
+import com.knife.base.exception.BusinessException;
 import com.knife.gateway.common.GateWayCode;
 import com.knife.gateway.common.SecurityConstants;
+import com.knife.base.provider.within.DesAlgorithm;
+import com.knife.base.utils.CollectionUtils;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

@@ -3,7 +3,7 @@ package com.knife.authority.provider.handler;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.util.IOUtils;
 import com.knife.authority.enums.BusinessCode;
-import com.knife.foundation.dto.Response;
+import com.knife.base.dto.Response;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 import org.springframework.stereotype.Component;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;

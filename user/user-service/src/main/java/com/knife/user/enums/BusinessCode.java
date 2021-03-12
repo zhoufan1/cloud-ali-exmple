@@ -1,6 +1,7 @@
 package com.knife.user.enums;
 
-import com.knife.foundation.dto.BaseCode;
+
+import com.knife.base.dto.BaseCode;
 
 /**
  * @author knife

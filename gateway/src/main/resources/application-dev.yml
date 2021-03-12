@@ -27,3 +27,5 @@ logging:
           naming:
             log:
               level: warn
+          client:
+            config: warn

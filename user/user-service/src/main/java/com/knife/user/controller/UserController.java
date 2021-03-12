@@ -1,6 +1,6 @@
 package com.knife.user.controller;
 
-import com.knife.foundation.dto.Response;
+import com.knife.base.dto.Response;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

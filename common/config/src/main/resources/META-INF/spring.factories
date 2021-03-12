@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.knife.config.web.config.WebConfigurationSupport,\
+  com.knife.config.web.interceptor.AuthorityRequestInterceptor

@@ -1,6 +1,6 @@
 package com.knife.authority.enums;
 
-import com.knife.foundation.dto.BaseCode;
+import com.knife.base.dto.BaseCode;
 import lombok.AllArgsConstructor;
 
 /**

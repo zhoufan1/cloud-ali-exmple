@@ -2,7 +2,7 @@ package com.knife.authority.controller;
 
 import com.knife.authority.rpc.dubbo.UserDubboServcie;
 import com.knife.authority.rpc.fegin.UserClient;
-import com.knife.foundation.dto.Response;
+import com.knife.base.dto.Response;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

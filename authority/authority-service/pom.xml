@@ -18,13 +18,18 @@
         </dependency>
         <dependency>
             <groupId>com.example</groupId>
+            <artifactId>authority-security</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
             <artifactId>user-api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!-- 工具类 -->
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>foundation</artifactId>
+            <artifactId>config</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!--web 模块-->
@@ -45,10 +50,6 @@
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
@@ -67,10 +68,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>

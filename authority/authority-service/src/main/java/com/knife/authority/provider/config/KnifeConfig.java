@@ -1,21 +1,18 @@
 package com.knife.authority.provider.config;
 
-import com.knife.authority.security.constants.KnifeConstants;
 import com.knife.authority.security.constants.SecurityConstants;
-import com.knife.foundation.authority.AuthoritySession;
-import com.knife.foundation.utils.JsonUtils;
+import com.knife.config.authority.AuthoritySession;
+import com.knife.base.utils.JsonUtils;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.sql.DataSource;
 import java.util.Map;
@@ -24,22 +21,12 @@ import java.util.Map;
 @Configuration
 public class KnifeConfig {
 
-    @AllArgsConstructor
     public static class KnifeTokenConfig {
-        private final RedisConnectionFactory redisConnectionFactory;
-
         @Bean
         public JwtAccessTokenConverter jwtAccessTokenConverter() {
             JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
             jwtAccessTokenConverter.setSigningKey("knife");
             return jwtAccessTokenConverter;
-        }
-
-        @Bean
-        public RedisTokenStore tokenStore() {
-            RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
-            tokenStore.setPrefix(KnifeConstants.TOKEN_PREFIX);
-            return tokenStore;
         }
 
 

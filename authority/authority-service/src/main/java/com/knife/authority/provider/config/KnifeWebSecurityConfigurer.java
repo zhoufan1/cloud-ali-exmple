@@ -1,6 +1,7 @@
 package com.knife.authority.provider.config;
 
 import com.alibaba.fastjson.JSON;
+import com.knife.authority.security.config.KnifeClientIgnore;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -15,11 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
-@EnableWebSecurity()
+@EnableWebSecurity
 @AllArgsConstructor
 @Slf4j
 public class KnifeWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
-    private final KnifeFilterIgnoreConfig knifeFilterIgnoreConfig;
+    private final KnifeClientIgnore knifeClientIgnore;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -37,9 +38,9 @@ public class KnifeWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry register =
                 http.authorizeRequests();
-        List<String> urls = knifeFilterIgnoreConfig.getUrls();
+        List<String> urls = knifeClientIgnore.getUrls();
         urls.forEach(url -> register.antMatchers(url).permitAll());
         register.anyRequest().authenticated().and().csrf().disable();
-        log.info("ignore urls :{}", JSON.toJSONString(knifeFilterIgnoreConfig.getUrls()));
+        log.info("ignore urls :{}", JSON.toJSONString(knifeClientIgnore.getUrls()));
     }
 }

@@ -1,6 +1,6 @@
 package com.knife.gateway.common;
 
-import com.knife.foundation.dto.BaseCode;
+import com.knife.base.dto.BaseCode;
 import lombok.AllArgsConstructor;
 
 /**
@@ -17,8 +17,8 @@ public enum  GateWayCode implements BaseCode {
 
     
     
-    private String code;
-    private String message;
+    private final String code;
+    private final String message;
     
     @Override
     public String getCode() {

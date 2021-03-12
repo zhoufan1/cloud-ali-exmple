@@ -1,8 +1,8 @@
 package com.knife.gateway.handler;
 
-import com.knife.foundation.dto.Response;
-import com.knife.foundation.exception.BusinessException;
-import com.knife.foundation.utils.JsonUtils;
+import com.knife.base.dto.Response;
+import com.knife.base.exception.BusinessException;
+import com.knife.base.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;

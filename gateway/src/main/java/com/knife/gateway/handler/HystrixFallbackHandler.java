@@ -1,6 +1,6 @@
 package com.knife.gateway.handler;
 
-import com.knife.foundation.dto.SystemCode;
+import com.knife.base.dto.SystemCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.http.HttpStatus;
@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.server.HandlerFunction;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
+
 import java.util.Optional;
 
 /**

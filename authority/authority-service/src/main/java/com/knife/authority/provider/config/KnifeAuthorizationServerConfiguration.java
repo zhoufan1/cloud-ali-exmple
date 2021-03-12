@@ -1,6 +1,8 @@
 package com.knife.authority.provider.config;
 
 import com.google.common.collect.Lists;
+import com.knife.authority.security.config.KnifeClientCredentialsTokenEndpointFilter;
+import com.knife.authority.security.config.KnifeResponseExceptionTranslator;
 import com.knife.authority.security.constants.SecurityConstants;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -30,7 +32,6 @@ public class KnifeAuthorizationServerConfiguration extends AuthorizationServerCo
     private final TokenStore tokenStore;
     private final JwtAccessTokenConverter jwtAccessTokenConverter;
     private final UserDetailsService knifeUserServiceDetailImpl;
-
     /**
      * 端点安全配置
      *
@@ -39,10 +40,13 @@ public class KnifeAuthorizationServerConfiguration extends AuthorizationServerCo
     @Override
     @SneakyThrows
     public void configure(AuthorizationServerSecurityConfigurer security) {
+        KnifeClientCredentialsTokenEndpointFilter filter = new KnifeClientCredentialsTokenEndpointFilter(security);
         security
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()")
-                .allowFormAuthenticationForClients();
+                .allowFormAuthenticationForClients()
+                .addTokenEndpointAuthenticationFilter(filter);
+
     }
 
     /**
@@ -94,6 +98,7 @@ public class KnifeAuthorizationServerConfiguration extends AuthorizationServerCo
         ArrayList<TokenEnhancer> tokenEnhancers = Lists.newArrayList(tokenEnhancer);
         tokenEnhancerChain.setTokenEnhancers(tokenEnhancers);
         endpoints.tokenEnhancer(tokenEnhancerChain).accessTokenConverter(jwtAccessTokenConverter);
+        endpoints.exceptionTranslator(new KnifeResponseExceptionTranslator());
     }
 
 }

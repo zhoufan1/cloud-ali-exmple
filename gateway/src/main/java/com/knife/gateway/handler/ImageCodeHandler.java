@@ -2,9 +2,9 @@ package com.knife.gateway.handler;
 
 import com.google.code.kaptcha.Producer;
 import com.google.common.base.Joiner;
-import com.knife.foundation.provider.within.DesAlgorithm;
-import com.knife.foundation.utils.DateUtils;
 import com.knife.gateway.common.SecurityConstants;
+import com.knife.base.provider.within.DesAlgorithm;
+import com.knife.base.utils.DateUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;

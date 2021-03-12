@@ -1,7 +1,7 @@
 package com.knife.user.controller;
 
+import com.knife.base.dto.Response;
 import com.knife.user.dto.response.UserResponse;
-import com.knife.foundation.dto.Response;
 import com.knife.user.model.User;
 import com.knife.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
